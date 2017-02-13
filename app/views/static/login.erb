@@ -1,12 +1,21 @@
-<h2>Sign In</h2>
-<form method="post" action="/sessions">
-	<input type="text" placeholder="Email" name="login_email"><br>
-	<input type="text" placeholder="Password" name="login_password"><br>
-	<button type="submit">Sign In</button>
-</form>
+<div id="bg-image"></div>
+<div id="quora-logo"></div>
+<div id="quora-slogan">
+	A place to share knowledge and better understand the world
+</div>
 
-<p>
-	<% if @msg != nil %>
-		<%= @msg %>
-	<% end %>
-</p>
+<div class="container">
+	<form id="form" method="post" action="/sessions">
+		<h4>Login</h4>
+		<input class="form-control" type="text" placeholder="Email" name="login_email"><br>
+		<input class="form-control" type="password" placeholder="Password" name="login_password">
+		<br>
+		<button type="submit" class="btn btn-primary">Sign In</button>
+	</form>
+
+	<p>
+		<% if @msg != nil %>
+			<%= @msg %>
+		<% end %>
+	</p>
+</div>

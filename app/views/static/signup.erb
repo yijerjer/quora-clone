@@ -1,16 +1,24 @@
-<h2>Sign up page</h2>
-<form method="post" action="/users">
-	<input type="text" placeholder="Name" name="user_name"><br>
-	<input type="text" placeholder="Email" name="user_email"><br>
-	<input type="text" placeholder="Password" name="user_password"><br>
-	<input type="text" placeholder="Re-enter Password" name="user_reenter_password"><br>
-	<button type="submit" value="submit">Sign Up</button>
-</form>
+<div id="bg-image"></div>
+<div id="quora-logo"></div>
+<div id="quora-slogan">
+	A place to share knowledge and better understand the world
+</div>
 
-<p>
-	<% if @errors != nil %>
-		<% @errors.each do |key, error| %>
-			<p><%= error %></p>
+<div class="container">
+	<form id="form" method="post" action="/users">
+		<h4>Sign Up</h4>
+		<input class="form-control" type="text" placeholder="Name" name="user_name"><br>
+		<input class="form-control" type="text" placeholder="Email" name="user_email"><br>
+		<input class="form-control" type="password" placeholder="Password" name="user_password"><br>
+		<input class="form-control" type="password" placeholder="Re-enter Password" name="user_reenter_password"><br>
+		<button type="submit" class="btn btn-primary">Sign Up</button>
+	</form>
+
+	<p>
+		<% if @errors != nil %>
+			<% @errors.each do |key, error| %>
+				<p><%= error %></p>
+			<% end %>
 		<% end %>
-	<% end %>
-</p>
+	</p>
+</div>

@@ -1,5 +1,15 @@
-<% if !logged_in? %>
-	<a href="/sessions/new">Login</a>
-	<br>
-<% end %>
-<a href="/users/new">Sign Up</a>
+<div class="container">
+	<h1 class="text-center">Homepage</h1>
+	<% if !logged_in? %>
+		<form action="/sessions/new">
+			<button class="btn btn-default btn-lg" type="submit">Log In</button>
+		</form>
+		<form>
+			<button	class="btn btn-default btn-lg" type="submit">Sign Up</button>
+		</form>
+	<% else %>
+		<form action="/sessions/destroy">
+			<button class="btn btn-default btn-lg" type="submit">Log Out</button>
+		</form>	
+	<% end %>
+</div>

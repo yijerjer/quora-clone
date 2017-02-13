@@ -1,0 +1,40 @@
+#bg-image {
+	background: url(https://qsf.ec.quoracdn.net/-3-images.home.logged_out_bg4.png-26-e983e9663f0687ee.png);
+	height: 1px;
+	width: 100%;
+	padding-bottom: 845px;
+	margin-bottom: -845px;
+	background-repeat: no-repeat;
+	background-position: center 10%;
+}
+
+#quora-logo {
+	width: 224px;
+	height: 82px;
+	background-size: 224px 63px;
+	background-image: url(https://qsf.ec.quoracdn.net/-3-images.logo.wordmark_default.svg-26-32753849bf197b54.svg);
+	background-repeat: no-repeat;
+	background-position: center center;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 40px;
+}
+
+#quora-slogan {
+	font-size: 18px;
+	text-align: center;
+	color: #999;
+	font-family: serif;
+}
+
+#form {
+	width: 400px;
+	margin: 60px auto;
+	padding: 20px 80px 60px 80px;
+	border: solid 1px #ccc;
+}
+
+.btn-primary {
+	float: right;
+}

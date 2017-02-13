@@ -20,6 +20,7 @@ post '/users' do
 
 	if new_user.valid?
 		new_user.save
+		redirect "/"
 
 	else
 		@errors = new_user.errors.messages
@@ -46,15 +47,21 @@ post '/sessions' do
 	login_user = User.find_by(email: params[:login_email]).try(:authenticate, params[:login_password])
 	if login_user
 		session[:user_id] = login_user.id
-		msg = session[:user_id]
+		redirect "/"
 	elsif login_user == nil # when email is incorrect
 		msg = 'Invalid email'
+		redirect "/sessions/new?msg=#{msg}"
 	elsif login_user == false # when password is incorrect
 		msg = 'Incorrect password'
+		redirect "/sessions/new?msg=#{msg}"
 	end
 
-	redirect "/sessions/new?msg=#{msg}"
+end
 
+# signout user
+get '/sessions/destroy' do
+	session[:user_id] = nil
+	redirect "/"
 end
 
 
