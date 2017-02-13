@@ -1,0 +1,4 @@
+<h3><%= @question.text %></h3>
+<% @question.answers.each do |row| %>
+	<p><%= row.text %></p>
+<% end %>

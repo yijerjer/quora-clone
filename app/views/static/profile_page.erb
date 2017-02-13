@@ -2,3 +2,12 @@
 <p><%= @profile.email %></p>
 <p><%= @profile.id %></p>
 
+<h2>Questions</h2>
+<% @user_ques.each do |row| %>
+	<p><%= row.text %></p>
+<% end %>
+
+<h2>Answers</h2>
+<% @user_ans.each do |row| %>
+	<p><%= row.text %></p>
+<% end %>
