@@ -1,6 +1,9 @@
 enable :sessions
 
+# displays all questions
 get '/' do
+	@all_qu = Question.all
+
   erb :'static/index'
 end
 

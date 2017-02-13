@@ -1,5 +1,5 @@
+<h1 class="text-center">Homepage</h1>
 <div class="container">
-	<h1 class="text-center">Homepage</h1>
 	<% if !logged_in? %>
 		<form action="/sessions/new">
 			<button class="btn btn-default btn-lg" type="submit">Log In</button>
@@ -11,5 +11,13 @@
 		<form action="/sessions/destroy">
 			<button class="btn btn-default btn-lg" type="submit">Log Out</button>
 		</form>	
+	<% end %>
+</div>
+
+<div class="container">
+	<% @all_qu.each do |row| %>
+		<p><%= row.text %></p>
+		<p><%= User.find(row.user_id).name %></p>
+		<br>
 	<% end %>
 </div>
