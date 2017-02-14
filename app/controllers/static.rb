@@ -36,6 +36,8 @@ end
 # get profile page of user
 get '/users/:id' do
 	@profile = User.find(params[:id])
+	@user_ques = @profile.questions
+	@user_ans = @profile.answers
 	erb :'static/profile_page'
 end
 
@@ -67,4 +69,64 @@ get '/sessions/destroy' do
 	redirect "/"
 end
 
+# display a specific question
+get '/questions/:id' do
+	@question = Question.find(params[:id])
 
+	erb :'static/question'
+end
+
+# creates a new question
+post '/questions' do
+	new_question = Question.create(text: params[:question_text], user_id: current_user.id)
+	p new_question.id
+	redirect "/questions/#{new_question.id}"
+end
+
+post '/questions/:id/upvote' do
+	if logged_in?
+		QuestionVote.create(question_id: params[:id], 
+												user_id: current_user.id, 
+												vote: 1
+												)
+		redirect '/'
+	else
+		redirect '/sessions/new'
+	end
+end
+
+post '/questions/:id/downvote' do
+	if logged_in?
+		QuestionVote.create(question_id: params[:id], 
+												user_id: current_user.id, 
+												vote: -1
+												)
+		redirect '/'
+	else
+		redirect '/sessions/new'
+	end
+end
+
+post '/answers/:id/upvote' do
+	if logged_in?
+		AnswerVote.create(answer_id: params[:id], 
+												user_id: current_user.id, 
+												vote: 1
+												)
+		redirect '/'
+	else
+		redirect '/sessions/new'
+	end
+end
+
+post '/answers/:id/downvote' do
+	if logged_in?
+		AnswerVote.create(answer_id: params[:id], 
+												user_id: current_user.id, 
+												vote: -1
+												)
+		redirect '/'
+	else
+		redirect '/sessions/new'
+	end
+end

@@ -1,4 +1,58 @@
-<h3><%= @question.text %></h3>
-<% @question.answers.each do |row| %>
-	<p><%= row.text %></p>
-<% end %>
+<nav class="navbar navbar-default">
+	<div class="navbar-content">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/">
+				<img id="navbar-logo" alt="Quora" src="https://qsf.ec.quoracdn.net/-3-images.logo.wordmark_default.svg-26-32753849bf197b54.svg">
+			</a>
+		</div>
+		<% if !logged_in? %>
+			<a class="btn btn-default navbar-btn" href="/sessions/new">Log In</a>
+			<a class="btn btn-default navbar-btn" href="/users/new">Sign Up</a>
+		<% else %>
+			<form class="navbar-form navbar-left" action="/questions" method="post">
+				<div class="form-group">
+					<input type="text" class="form-control navbar-input" name="question_text" placeholder="Ask a Question">
+				</div>
+				<button type="submit" class="btn btn-default navbar-submit">Ask</button>
+			</form>
+			<a class="btn btn-default navbar-btn" href="/sessions/destroy" method="post">Log Out</a>
+		<% end %>
+	</div>
+</nav>
+
+<div class="container">
+	<div class="ques-ans-row">
+		<p class="question-info">Asked by <a href="/users/<%= @question.user_id %>"><%= User.find(@question.user_id).name %></a> · <%= @question.created_at %></p>
+		<p class="question-text"><%= @question.text %></p>
+		<div class="up-down-vote-btns">
+			<form method="post" action="/questions/<%= @question.id %>/upvote">
+				<button type="submit" class="btn btn-default btn-sm">
+					<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> <%= @question.question_votes.where(vote: 1).count %>
+				</button>
+			</form>
+			<form method="post" action="/questions/<%= @question.id %>/downvote">
+				<button type="submit" class="btn btn-default btn-sm">
+					<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> <%= @question.question_votes.where(vote: -1).count %>
+				</button>
+			</form>
+		</div>
+	</div>
+	<% @question.answers.each do |row| %>
+		<div class="ques-ans-row">
+			<p class="question-info">Answer by <a href="/users/<%= row.user_id %>"><%= User.find(row.user_id).name %></a> · <%= row.created_at %></p>
+		<p><%= row.text %></p>
+		<div class="up-down-vote-btns">
+			<form method="post" action="/answers/<%= row.id %>/upvote">
+				<button type="submit" class="btn btn-default btn-xs">
+					<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> <%= row.answer_votes.where(vote: 1).count %>
+				</button>
+			</form>
+			<form method="post" action="/answers/<%= row.id %>/downvote">
+				<button type="submit" class="btn btn-default btn-xs">
+					<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> <%= row.answer_votes.where(vote: -1).count %>
+				</button>
+			</form>
+		</div>
+		</div>
+	<% end %>
+</div>

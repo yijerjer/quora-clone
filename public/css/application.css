@@ -1,3 +1,8 @@
+/*
+<<<<<<<<<<<<<<<<<<<<
+LOGIN & SIGNUP PAGE
+<<<<<<<<<<<<<<<<<<<<
+*/
 #bg-image {
 	background: url(https://qsf.ec.quoracdn.net/-3-images.home.logged_out_bg4.png-26-e983e9663f0687ee.png);
 	height: 1px;
@@ -37,4 +42,136 @@
 
 .btn-primary {
 	float: right;
+}
+
+/*
+<<<<<<<<<<<<<<<<<<<<
+HEADER BAR
+<<<<<<<<<<<<<<<<<<<<
+*/
+
+.navbar-default {
+	background-color: #fff;
+	border-top: solid 2px #b92b27;
+	border-bottom: solid 1px #bbb;
+}
+
+.navbar-content {
+	width: 1010px;
+	margin: 0 auto 0 auto;
+}
+
+#navbar-logo {
+	height: 110%;
+	width: 110%;
+}
+
+.navbar-input {
+	width: 400px !important;
+	border-radius: 4px 0 0 4px;
+	margin-right: -5px;
+}
+
+
+.navbar-submit {
+	border-radius: 0 4px 4px 0;
+}
+
+.navbar-btn {
+	float: right;
+	margin-left: 10px;
+}
+
+/*
+<<<<<<<<<<<<<<<<<<<<
+HOMEPAGE
+<<<<<<<<<<<<<<<<<<<<
+*/
+
+.container {
+	width: 1000px;
+}
+
+.ques-ans-row {
+	padding-bottom: 10px;
+	border-bottom: solid 1px #ccc;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.question-info {
+	margin-bottom: 5px;
+	color: #aaa;
+}
+
+.question-info a {
+	color: #aaa;
+}
+
+.question-text a {
+	font-size: 18px;
+	font-family: 'q-serif';
+	font-weight: 900;
+	color: #000;
+}
+
+.up-down-vote-btns {
+	width: 1000px;
+	height: 35px;
+
+}
+
+.up-down-vote-btns form {
+	float: left;
+	margin: 2px;
+}
+
+/*
+<<<<<<<<<<<<<<<<<<<<
+PROFILE PAGE
+<<<<<<<<<<<<<<<<<<<<
+*/
+
+.profile-name {
+	font-size: 35px;
+	font-family: 'q-serif';
+	font-weight: 900;
+}
+
+.profile-email {
+	font-size: 16px;
+	color: #666;
+}
+
+.profile-ques-ans {
+	margin-top: 20px;
+}
+
+.profile-questions {
+	float: left;
+	width: 50%;
+	padding-right: 20px;
+}
+
+.profile-answers {
+	float: left;
+	width: 50%;
+	padding-left: 20px;
+}
+
+.profile-answers h5 {
+	font-weight: 600;
+}
+
+/*
+<<<<<<<<<<<<<<<<<<<<
+PROFILE PAGE
+<<<<<<<<<<<<<<<<<<<<
+*/
+
+.question-text {
+	font-size: 22px;
+	font-family: 'q-serif';
+	font-weight: 900;
+	color: #000;
 }
