@@ -33,7 +33,7 @@ LOGIN & SIGNUP PAGE
 	font-family: serif;
 }
 
-#form {
+.login-signup-form {
 	width: 400px;
 	margin: 60px auto;
 	padding: 20px 80px 60px 80px;
@@ -42,6 +42,11 @@ LOGIN & SIGNUP PAGE
 
 .btn-primary {
 	float: right;
+}
+
+.error-msg {
+	color: #b92b27;
+	float: left;
 }
 
 /*

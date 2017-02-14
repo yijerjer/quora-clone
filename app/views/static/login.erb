@@ -5,17 +5,13 @@
 </div>
 
 <div class="container">
-	<form id="form" method="post" action="/sessions">
+	<form id="login-form" class="login-signup-form" method="post" action="/sessions">
 		<h4>Login</h4>
-		<input class="form-control" type="text" placeholder="Email" name="login_email"><br>
+		<input class="form-control" type="text" placeholder="Email" name="login_email">
+		<br>
 		<input class="form-control" type="password" placeholder="Password" name="login_password">
 		<br>
+		<p class="error-msg"></p>
 		<button type="submit" class="btn btn-primary">Sign In</button>
 	</form>
-
-	<p>
-		<% if @msg != nil %>
-			<%= @msg %>
-		<% end %>
-	</p>
 </div>

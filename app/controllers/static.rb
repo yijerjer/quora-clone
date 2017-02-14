@@ -1,11 +1,8 @@
 enable :sessions
 
-# displays all questions
-get '/' do
-	@all_qu = Question.all
-
-  erb :'static/index'
-end
+####################
+# SIGNUP
+####################
 
 # render signup page
 get '/users/new' do
@@ -23,27 +20,20 @@ post '/users' do
 
 	if new_user.valid?
 		new_user.save
-		redirect "/"
-
+		"/sessions/new".to_json
 	else
-		@errors = new_user.errors.messages
-		# redirect "/users/new?#{@errors}"
+		new_user.errors.messages.to_json
 	end
-
-	erb :'static/signup'
 end
 
-# get profile page of user
-get '/users/:id' do
-	@profile = User.find(params[:id])
-	@user_ques = @profile.questions
-	@user_ans = @profile.answers
-	erb :'static/profile_page'
-end
+####################
+# SIGN IN/SIGN OUT
+####################
 
 # render signin page
 get '/sessions/new' do
 	@msg = params[:msg]
+
 	erb :'static/login'
 end
 
@@ -52,13 +42,11 @@ post '/sessions' do
 	login_user = User.find_by(email: params[:login_email]).try(:authenticate, params[:login_password])
 	if login_user
 		session[:user_id] = login_user.id
-		redirect "/"
+		'/'.to_json
 	elsif login_user == nil # when email is incorrect
-		msg = 'Invalid email'
-		redirect "/sessions/new?msg=#{msg}"
+		'Invalid email.'.to_json
 	elsif login_user == false # when password is incorrect
-		msg = 'Incorrect password'
-		redirect "/sessions/new?msg=#{msg}"
+		'Incorrect password.'.to_json
 	end
 
 end
@@ -68,6 +56,30 @@ get '/sessions/destroy' do
 	session[:user_id] = nil
 	redirect "/"
 end
+
+####################
+# RENDER INFO
+####################
+
+# displays all questions
+get '/' do
+	@all_qu = Question.all
+
+  erb :'static/index'
+end
+
+# get profile page of user
+get '/users/:id' do
+	@profile = User.find(params[:id])
+	@user_ques = @profile.questions
+	@user_ans = @profile.answers
+
+	erb :'static/profile_page'
+end
+
+####################
+# QUESTIONS
+####################
 
 # display a specific question
 get '/questions/:id' do
@@ -83,6 +95,7 @@ post '/questions' do
 	redirect "/questions/#{new_question.id}"
 end
 
+# upvote question
 post '/questions/:id/upvote' do
 	if logged_in?
 		QuestionVote.create(question_id: params[:id], 
@@ -95,6 +108,7 @@ post '/questions/:id/upvote' do
 	end
 end
 
+# downvote question
 post '/questions/:id/downvote' do
 	if logged_in?
 		QuestionVote.create(question_id: params[:id], 
@@ -107,6 +121,11 @@ post '/questions/:id/downvote' do
 	end
 end
 
+####################
+# ANSWERS
+####################
+
+#upvote answer
 post '/answers/:id/upvote' do
 	if logged_in?
 		AnswerVote.create(answer_id: params[:id], 
@@ -119,6 +138,7 @@ post '/answers/:id/upvote' do
 	end
 end
 
+#downvote answer
 post '/answers/:id/downvote' do
 	if logged_in?
 		AnswerVote.create(answer_id: params[:id], 

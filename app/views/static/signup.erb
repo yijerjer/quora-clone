@@ -5,20 +5,19 @@
 </div>
 
 <div class="container">
-	<form id="form" method="post" action="/users">
+	<form id="signup-form" class="login-signup-form" method="post" action="/users">
 		<h4>Sign Up</h4>
-		<input class="form-control" type="text" placeholder="Name" name="user_name"><br>
-		<input class="form-control" type="text" placeholder="Email" name="user_email"><br>
-		<input class="form-control" type="password" placeholder="Password" name="user_password"><br>
-		<input class="form-control" type="password" placeholder="Re-enter Password" name="user_reenter_password"><br>
+		<input class="form-control" type="text" placeholder="Name" name="user_name">
+		<br>
+		<input class="form-control" type="text" placeholder="Email" name="user_email">
+		<p class="error-msg"></p>
+		<br>
+		<input class="form-control" type="password" placeholder="Password" name="user_password">
+		<p class="error-msg"></p>
+		<br>
+		<input class="form-control" type="password" placeholder="Re-enter Password" name="user_reenter_password">
+		<p class="error-msg"></p>
+		<br>
 		<button type="submit" class="btn btn-primary">Sign Up</button>
 	</form>
-
-	<p>
-		<% if @errors != nil %>
-			<% @errors.each do |key, error| %>
-				<p><%= error %></p>
-			<% end %>
-		<% end %>
-	</p>
 </div>
