@@ -16,6 +16,7 @@
 				<button type="submit" class="btn btn-default navbar-submit">Ask</button>
 			</form>
 			<a class="btn btn-default navbar-btn" href="/sessions/destroy" method="post">Log Out</a>
+			<a class="btn btn-default navbar-btn" href="/users/<%= current_user.id %>" method="post">Profile</a>
 		<% end %>
 	</div>
 </nav>
@@ -26,8 +27,8 @@
 		<div class="ques-ans-row">
 			<p class="question-info">Asked by <a href="/users/<%= row.user_id %>"><%= User.find(row.user_id).name %></a> · <%= row.created_at %></p>
 			<p class="question-text"><a href="/questions/<%= row.id %>"><%= row.text %></a></p>
-			<div class="up-down-vote-btns">
-				<form method="post" action="/questions/<%= row.id %>/upvote">
+			<div class="up-down-vote">
+				<form class="upvote-form" method="post" action="/questions/<%= row.id %>/upvote">
 					<% if row.question_votes.find_by(user_id: current_user.id) == nil || row.question_votes.find_by(user_id: current_user.id).vote == -1 %>
 						<button type="submit" class="btn btn-default btn-sm">
 					<% elsif row.question_votes.find_by(user_id: current_user.id).vote == 1 %>
@@ -36,7 +37,7 @@
 							<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> <%= row.question_votes.where(vote: 1).count %>
 						</button>
 				</form>
-				<form method="post" action="/questions/<%= row.id %>/downvote">
+				<form class="downvote-form" method="post" action="/questions/<%= row.id %>/downvote">
 					<% if row.question_votes.find_by(user_id: current_user.id) == nil || row.question_votes.find_by(user_id: current_user.id).vote == 1 %>
 						<button type="submit" class="btn btn-default btn-sm">
 					<% elsif row.question_votes.find_by(user_id: current_user.id).vote == -1 %>
