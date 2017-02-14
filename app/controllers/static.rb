@@ -1,5 +1,5 @@
 enable :sessions
-
+require 'byebug'
 ####################
 # SIGNUP
 ####################
@@ -98,10 +98,19 @@ end
 # upvote question
 post '/questions/:id/upvote' do
 	if logged_in?
-		QuestionVote.create(question_id: params[:id], 
-												user_id: current_user.id, 
-												vote: 1
-												)
+		user_vote = QuestionVote.find_by(question_id: params[:id], user_id: current_user.id)
+
+		if user_vote == nil
+			QuestionVote.create(question_id: params[:id], 
+													user_id: current_user.id, 
+													vote: 1
+													)
+		elsif user_vote.vote == 1 # if the user has already upvoted, remove his upvote
+			user_vote.destroy
+		elsif user_vote.vote == -1 # if the user has downvoted, make it an upvote
+			user_vote.update(vote: 1)
+		end
+
 		redirect '/'
 	else
 		redirect '/sessions/new'
@@ -111,10 +120,19 @@ end
 # downvote question
 post '/questions/:id/downvote' do
 	if logged_in?
-		QuestionVote.create(question_id: params[:id], 
-												user_id: current_user.id, 
-												vote: -1
-												)
+		user_vote = QuestionVote.find_by(question_id: params[:id], user_id: current_user.id)
+
+		if user_vote == nil
+			QuestionVote.create(question_id: params[:id], 
+													user_id: current_user.id, 
+													vote: -1
+													)
+		elsif user_vote.vote == -1 # if the user has already downvoted, remove his downvote
+			user_vote.destroy
+		elsif user_vote.vote == 1 # if the user has upvoted, make it a downvote
+			user_vote.update(vote: -1)
+		end
+
 		redirect '/'
 	else
 		redirect '/sessions/new'
@@ -128,10 +146,19 @@ end
 #upvote answer
 post '/answers/:id/upvote' do
 	if logged_in?
-		AnswerVote.create(answer_id: params[:id], 
-												user_id: current_user.id, 
-												vote: 1
-												)
+		user_vote = AnswerVote.find_by(answer_id: params[:id], user_id: current_user.id)
+
+		if user_vote == nil
+			AnswerVote.create(answer_id: params[:id], 
+													user_id: current_user.id, 
+													vote: 1
+													)
+		elsif user_vote.vote == 1 # if the user has already upvoted, remove his upvote
+			user_vote.destroy
+		elsif user_vote.vote == -1 # if the user has downvoted, make it an upvote
+			user_vote.update(vote: 1)
+		end
+
 		redirect '/'
 	else
 		redirect '/sessions/new'
@@ -141,10 +168,19 @@ end
 #downvote answer
 post '/answers/:id/downvote' do
 	if logged_in?
-		AnswerVote.create(answer_id: params[:id], 
-												user_id: current_user.id, 
-												vote: -1
-												)
+		user_vote = AnswerVote.find_by(answer_id: params[:id], user_id: current_user.id)
+
+		if user_vote == nil
+			AnswerVote.create(answer_id: params[:id], 
+													user_id: current_user.id, 
+													vote: -1
+													)
+		elsif user_vote.vote == -1 # if the user has already downvoted, remove his downvote
+			user_vote.destroy
+		elsif user_vote.vote == 1 # if the user has upvoted, make it a downvote
+			user_vote.update(vote: -1)
+		end
+
 		redirect '/'
 	else
 		redirect '/sessions/new'
