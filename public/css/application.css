@@ -52,7 +52,7 @@ LOGIN & SIGNUP PAGE
 .remodal {
 	width: 500px;
 	background-image: url(https://qsf.ec.quoracdn.net/-3-images.home.logged_out_bg4.png-26-e983e9663f0687ee.png);
-	background-position: -800px -380px;
+	background-position: -894px -300px;
 }
 
 #modal-logo {
@@ -71,7 +71,7 @@ LOGIN & SIGNUP PAGE
 	color: #888;
 }
 
-.modal-login-form {
+#modal-login-form {
 	width: 300px;
 	margin-left: auto;
 	margin-right: auto;
@@ -79,7 +79,12 @@ LOGIN & SIGNUP PAGE
 }
 
 .btn-modal {
-	float: none;
+	float: right;
+}
+
+.signup-msg {
+	width: 300px;
+	margin-bottom: 15px;
 }
 /*
 <<<<<<<<<<<<<<<<<<<<
@@ -112,6 +117,11 @@ HEADER BAR
 
 .navbar-submit {
 	border-radius: 0 4px 4px 0;
+}
+
+.navbar-error-msg {
+	color: #b92b27;
+	margin-left: 10px;
 }
 
 .navbar-btn {
@@ -216,6 +226,9 @@ PROFILE PAGE
 QUESTION PAGE
 <<<<<<<<<<<<<<<<<<<<
 */
+#answer-form {
+	margin-bottom: 150px;
+}
 
 .answer-input {
 	width: 100%;
@@ -226,3 +239,4 @@ QUESTION PAGE
 	border: solid 1px #ccc;
 	border-radius: 4px;
 }
+

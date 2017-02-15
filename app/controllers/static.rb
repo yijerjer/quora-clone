@@ -90,9 +90,16 @@ end
 
 # creates a new question
 post '/questions' do
-	new_question = Question.create(text: params[:question_text], user_id: current_user.id)
-	p new_question.id
-	redirect "/questions/#{new_question.id}"
+	if logged_in?
+		if params[:question_text] != ""
+			new_question = Question.create(text: params[:question_text], user_id: current_user.id)
+			"/questions/#{new_question.id}".to_json
+		else
+			"Eh WHere question?!?!".to_json
+		end
+	else
+	"/sessions/new".to_json
+	end
 end
 
 # upvote question

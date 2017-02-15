@@ -17,6 +17,27 @@ $(document).ready(function() {
 		});
 	});
 
+	// modal login form
+	$('#modal-login-form').submit(function(e) {
+		e.preventDefault();
+		var $t = $(this);
+		$.ajax({
+			url: $t.attr('action'),
+			method: 'POST', 
+			data: $t.serialize(),
+			dataType: 'json',
+			success: function(data) {
+				if (data === 'Invalid email.' || data === 'Incorrect password.') {
+					$('#modal-login-form > .error-msg').html(data).hide().fadeIn(500);
+				} else {
+					var currentUrl = $(location).attr('href');
+					currentUrl = currentUrl.slice(0, -6);
+					window.location.replace(currentUrl);
+				}
+			}
+		});
+	});
+
 	// show signup errors
 	$('#signup-form').submit(function(e) {
 		e.preventDefault();
@@ -132,13 +153,34 @@ $(document).ready(function() {
 			success: function(data) {
 				if (data === 'You did not provide an answer.') {
 					$t.find('.error-msg').html(data).hide().fadeIn(500);
-				} else {
+				} else if (data === '/sessions/new') {
 			    $('[data-remodal-id=modal]').remodal().open();
-					// window.location.replace(data);
+				} else {
+					window.location.replace(data);
 				}
 			}
 		});
 	});
 
+	$('.navbar-form').submit(function(e) {
+		e.preventDefault();
+		var $t = $(this);
+		$.ajax({
+			url: $(this).attr('action'),
+			method: 'POST',
+			data: $(this).serialize(),
+			dataType: 'json',
+			success: function(data) {
+				console.log(data);
+				if (data === '/sessions/new') {
+			    $('[data-remodal-id=modal]').remodal().open();
+				} else if (data === 'Eh WHere question?!?!') {
+					$t.find('label').html(data);
+				} else {
+					window.location.replace(data);
+				}
+			}
+		});
+	});
 
 });

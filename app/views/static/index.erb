@@ -1,25 +1,4 @@
-<nav class="navbar navbar-default">
-	<div class="navbar-content">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="/">
-				<img id="navbar-logo" alt="Quora" src="https://qsf.ec.quoracdn.net/-3-images.logo.wordmark_default.svg-26-32753849bf197b54.svg">
-			</a>
-		</div>
-		<% if !logged_in? %>
-			<a class="btn btn-default navbar-btn" href="/sessions/new">Log In</a>
-			<a class="btn btn-default navbar-btn" href="/users/new">Sign Up</a>
-		<% else %>
-			<form class="navbar-form navbar-left" action="/questions" method="post">
-				<div class="form-group">
-					<input type="text" class="form-control navbar-input" name="question_text" placeholder="Ask a Question">
-				</div>
-				<button type="submit" class="btn btn-default navbar-submit">Ask</button>
-			</form>
-			<a class="btn btn-default navbar-btn" href="/sessions/destroy" method="post">Log Out</a>
-			<a class="btn btn-default navbar-btn" href="/users/<%= current_user.id %>" method="post">Profile</a>
-		<% end %>
-	</div>
-</nav>
+<%= erb :'layouts/navbar', layout: false %>
 
 <div class="container">
 	<h4 class="ques-ans-row">All Questions</h4>

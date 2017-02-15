@@ -21,6 +21,7 @@
 			<%= yield %>
 		</div>
 
+
 		<!-- Remodal login form -->
 		<div class="remodal" data-remodal-id="modal">
 			<button data-remodal-action="close" class="remodal-close"></button>
@@ -28,7 +29,7 @@
 				<img alt="Quora" src="https://qsf.ec.quoracdn.net/-3-images.logo.wordmark_default.svg-26-32753849bf197b54.svg">
 			</div>
 			<br>
-			<form id="login-form" class="modal-login-form" method="post" action="/sessions">
+			<form id="modal-login-form" method="post" action="/sessions">
 				<h4 class="modal-title">Login to access more features!</h4>
 				<input class="form-control" type="text" placeholder="Email" name="login_email">
 				<br>
@@ -37,6 +38,9 @@
 				<p class="error-msg"></p>
 				<button type="submit" class="btn btn-primary btn-modal">Sign In</button>
 			</form>
+			<div class="signup-msg">
+				<p>Click here to <a href="users/new">sign up</a></p>
+			</div>
 		</div>
 	</body>
 </html>
