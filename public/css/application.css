@@ -124,6 +124,7 @@ HEADER BAR
 
 .navbar-error-msg {
 	color: #b92b27;
+	font-weight: 300;
 	margin-left: 10px;
 }
 

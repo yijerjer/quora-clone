@@ -177,7 +177,7 @@ $(document).ready(function() {
 				if (data === '/sessions/new') {
 			    $('[data-remodal-id=modal]').remodal().open();
 				} else if (data === 'Eh WHere question?!?!') {
-					$t.find('label').html(data);
+					$t.find('label').html(data).hide().fadeIn(500);
 				} else {
 					window.location.replace(data);
 				}
