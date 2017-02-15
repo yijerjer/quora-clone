@@ -62,7 +62,7 @@ end
 
 # displays all questions
 get '/' do
-	@all_qu = Question.all
+	@all_qu = Question.all.order("id desc")
 
   erb :'static/index'
 end
