@@ -10,8 +10,18 @@
 		<h4 class="ques-ans-row">All Questions</h4>
 		<% @user_ques.each do |row| %>
 			<div class="ques-ans-row">
-				<p class="question-info">Asked at <%= row.created_at %></p>
-				<p class="question-text"><a href="/questions/<%= row.id %>"><%= row.text %></a></p>
+				<% if @profile.id == current_user.id %>
+					<form class="delete-button" action="/questions/<%= row.id %>" method="post">
+						<input type="hidden" name="_method" value="DELETE">
+						<button type="submit">Delete</button>
+					</form>
+				<% end %>
+				<p class="question-info">
+					Asked at <%= row.created_at %>
+				</p>
+				<p class="question-text">
+					<a href="/questions/<%= row.id %>"><%= row.text %></a>
+				</p>
 			</div>
 		<% end %>
 	</div>
@@ -21,6 +31,12 @@
 			<div class="ques-ans-row">
 				<p class="question-text"><a href="/questions/<%= row.id %>"><%= Question.find(row.question_id).text %></a></p>
 				<h5>Your Answer:</h5>
+				<% if @profile.id == current_user.id %>
+					<form class="delete-button" action="/answers/<%= row.id %>" method="post">
+						<input type="hidden" name="_method" value="DELETE">
+						<button type="submit">Delete</button>
+					</form>
+				<% end %>
 				<p class="question-info">Answered at <%= row.created_at %></p>
 				<p><%= row.text %></p>
 			</div>

@@ -142,6 +142,7 @@ $(document).ready(function() {
 		});
 	});
 
+	// creates an answer for a question
 	$('#answer-form').submit(function(e) {
 		e.preventDefault();
 		var $t = $(this);
@@ -162,6 +163,7 @@ $(document).ready(function() {
 		});
 	});
 
+	// creates a question
 	$('.navbar-form').submit(function(e) {
 		e.preventDefault();
 		var $t = $(this);
@@ -182,5 +184,19 @@ $(document).ready(function() {
 			}
 		});
 	});
+
+	$('.delete-button').submit(function(e) {
+		e.preventDefault();
+		var $t=$(this);
+		$.ajax({
+			url: $(this).attr('action'),
+			method: 'DELETE',
+			data: $(this).serialize(),
+			dataType: 'json',
+			success: function(data) {
+				$t.parent().fadeOut(500);
+			}
+		});
+	})
 
 });

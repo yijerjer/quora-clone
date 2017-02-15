@@ -102,6 +102,15 @@ post '/questions' do
 	end
 end
 
+# deletes a question
+delete '/questions/:id' do
+	Question.find(params[:id]).destroy
+	Answer.where(question_id: params[:id]).delete_all
+
+	"destroyed question and its answers".to_json
+end
+	
+
 # upvote question
 post '/questions/:id/upvote' do
 	if logged_in?
@@ -164,6 +173,11 @@ post '/questions/:id/answers' do
 	else
 		"/sessions/new".to_json
 	end
+end
+
+delete '/answers/:id' do
+	Answer.find(params[:id]).destroy
+	"destroyed answer".to_json
 end
 
 
