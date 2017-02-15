@@ -6,6 +6,14 @@
 		<div class="ques-ans-row">
 			<p class="question-info">Asked by <a href="/users/<%= row.user_id %>"><%= User.find(row.user_id).name %></a> · <%= row.created_at %></p>
 			<p class="question-text"><a href="/questions/<%= row.id %>"><%= row.text %></a></p>
+			<p class="question-info">
+				<%= row.answers.count %>
+				<% if row.answers.count > 1 %>
+					 Answers
+				<% else %>
+					 Answer
+				<% end %>
+			</p>
 			<div class="up-down-vote">
 				<form class="upvote-form" method="post" action="/questions/<%= row.id %>/upvote">
 					<%= set_question_vote_button_color(row, "upvote") %>
