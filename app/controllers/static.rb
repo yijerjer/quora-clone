@@ -1,5 +1,4 @@
 enable :sessions
-require 'byebug'
 ####################
 # SIGNUP
 ####################
