@@ -27,49 +27,44 @@
 		<p class="question-text"><%= @question.text %></p>
 		<div class="up-down-vote">
 			<form class="upvote-form" method="post" action="/questions/<%= @question.id %>/upvote">
-				<% if @question.question_votes.find_by(user_id: current_user.id) == nil || @question.question_votes.find_by(user_id: current_user.id).vote == -1 %>
-					<button type="submit" class="btn btn-default btn-sm">
-				<% elsif @question.question_votes.find_by(user_id: current_user.id).vote == 1 %>
-					<button type="submit" class="btn btn-default btn-sm btn-grey">
-				<% end %>
-						<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> <%= @question.question_votes.where(vote: 1).count %>
-					</button>
+				<%= set_question_vote_button_color(@question, "upvote") %>
+					<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> <%= @question.question_votes.where(vote: 1).count %>
+				</button>
 			</form>
 			<form class="downvote-form" method="post" action="/questions/<%= @question.id %>/downvote">
-				<% if @question.question_votes.find_by(user_id: current_user.id) == nil || @question.question_votes.find_by(user_id: current_user.id).vote == 1 %>
-					<button type="submit" class="btn btn-default btn-sm">
-				<% elsif @question.question_votes.find_by(user_id: current_user.id).vote == -1 %>
-					<button type="submit" class="btn btn-default btn-sm btn-grey">
-				<% end %>
-						<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> <%= @question.question_votes.where(vote: -1).count %>
-					</button>
-			</form>
-		</div>
-	</div>
-	<% @question.answers.each do |row| %>
-		<div class="ques-ans-row">
-			<p class="question-info">Answer by <a href="/users/<%= row.user_id %>"><%= User.find(row.user_id).name %></a> · <%= row.created_at %></p>
-		<p><%= row.text %></p>
-		<div class="up-down-vote">
-			<form class="upvote-form" method="post" action="/answers/<%= row.id %>/upvote">
-				<% if row.answer_votes.find_by(user_id: current_user.id) == nil || row.answer_votes.find_by(user_id: current_user.id).vote == -1 %>
-					<button type="submit" class="btn btn-default btn-xs">
-				<% elsif row.answer_votes.find_by(user_id: current_user.id).vote == 1 %>
-					<button type="submit" class="btn btn-default btn-xs btn-grey">
-				<% end %>
-						<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> <%= row.answer_votes.where(vote: 1).count %>
-					</button>
-			</form>
-			<form class="downvote-form" method="post" action="/answers/<%= row.id %>/downvote">
-				<% if row.answer_votes.find_by(user_id: current_user.id) == nil || row.answer_votes.find_by(user_id: current_user.id).vote == 1 %>
-					<button type="submit" class="btn btn-default btn-xs">
-				<% elsif row.answer_votes.find_by(user_id: current_user.id).vote == -1 %>
-					<button type="submit" class="btn btn-default btn-xs btn-grey">
-				<% end %>
-					<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> <%= row.answer_votes.where(vote: -1).count %>
+				<%= set_question_vote_button_color(@question, "downvote") %>
+					<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> <%= @question.question_votes.where(vote: -1).count %>
 				</button>
 			</form>
 		</div>
+	</div>
+
+	<% @question.answers.each do |row| %>
+		<div class="ques-ans-row">
+			<p class="question-info">Answer by <a href="/users/<%= row.user_id %>"><%= User.find(row.user_id).name %></a> · <%= row.created_at %></p>
+			<p><%= row.text %></p>
+			<div class="up-down-vote">
+				<form class="upvote-form" method="post" action="/answers/<%= row.id %>/upvote">
+					<%= set_answer_vote_button_color(row, "upvote") %>
+						<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> <%= row.answer_votes.where(vote: 1).count %>
+					</button>
+				</form>
+				<form class="downvote-form" method="post" action="/answers/<%= row.id %>/downvote">
+					<%= set_answer_vote_button_color(row, "downvote") %>
+					<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> <%= row.answer_votes.where(vote: -1).count %>
+				</button>
+				</form>
+			</div>
 		</div>
 	<% end %>
+	
+	<p>Your Answer</p>
+	<form id="answer-form" method="post" action="/questions/<%= @question.id %>/answers">
+		<div class="form-group">
+		<textarea class="answer-input" name="answer_text" placeholder="Answer here..."></textarea>
+		<p class="error-msg"></p>
+		<button type="submit" class="btn btn-primary">Answer Question</button>
+		</div>
+	</form>
+	
 </div>

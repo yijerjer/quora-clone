@@ -29,22 +29,14 @@
 			<p class="question-text"><a href="/questions/<%= row.id %>"><%= row.text %></a></p>
 			<div class="up-down-vote">
 				<form class="upvote-form" method="post" action="/questions/<%= row.id %>/upvote">
-					<% if row.question_votes.find_by(user_id: current_user.id) == nil || row.question_votes.find_by(user_id: current_user.id).vote == -1 %>
-						<button type="submit" class="btn btn-default btn-sm">
-					<% elsif row.question_votes.find_by(user_id: current_user.id).vote == 1 %>
-						<button type="submit" class="btn btn-default btn-sm btn-grey">
-					<% end %>
-							<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> <%= row.question_votes.where(vote: 1).count %>
-						</button>
+					<%= set_question_vote_button_color(row, "upvote") %>
+						<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> <%= row.question_votes.where(vote: 1).count %>
+					</button>
 				</form>
 				<form class="downvote-form" method="post" action="/questions/<%= row.id %>/downvote">
-					<% if row.question_votes.find_by(user_id: current_user.id) == nil || row.question_votes.find_by(user_id: current_user.id).vote == 1 %>
-						<button type="submit" class="btn btn-default btn-sm">
-					<% elsif row.question_votes.find_by(user_id: current_user.id).vote == -1 %>
-						<button type="submit" class="btn btn-default btn-sm btn-grey">
-					<% end %>
-							<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> <%= row.question_votes.where(vote: -1).count %>
-						</button>
+					<%= set_question_vote_button_color(row, "downvote") %>
+						<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> <%= row.question_votes.where(vote: -1).count %>
+					</button>
 				</form>
 			</div>
 		</div>

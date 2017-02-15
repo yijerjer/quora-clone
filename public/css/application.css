@@ -49,6 +49,38 @@ LOGIN & SIGNUP PAGE
 	float: left;
 }
 
+.remodal {
+	width: 500px;
+	background-image: url(https://qsf.ec.quoracdn.net/-3-images.home.logged_out_bg4.png-26-e983e9663f0687ee.png);
+	background-position: -800px -380px;
+}
+
+#modal-logo {
+	margin-left: auto;
+	margin-right: auto;
+	width: 150px;
+	height: 40px;
+}
+
+#modal-logo img {
+	width: 100%;
+}
+
+.modal-title {
+	margin-bottom: 15px;
+	color: #888;
+}
+
+.modal-login-form {
+	width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 50px;
+}
+
+.btn-modal {
+	float: none;
+}
 /*
 <<<<<<<<<<<<<<<<<<<<
 HEADER BAR
@@ -120,7 +152,7 @@ HOMEPAGE
 	color: #000;
 }
 
-.up-down-vote-btns {
+.up-down-vote {
 	width: 1000px;
 	height: 35px;
 
@@ -172,15 +204,25 @@ PROFILE PAGE
 	font-weight: 600;
 }
 
-/*
-<<<<<<<<<<<<<<<<<<<<
-PROFILE PAGE
-<<<<<<<<<<<<<<<<<<<<
-*/
-
 .question-text {
 	font-size: 22px;
 	font-family: 'q-serif';
 	font-weight: 900;
 	color: #000;
+}
+
+/*
+<<<<<<<<<<<<<<<<<<<<
+QUESTION PAGE
+<<<<<<<<<<<<<<<<<<<<
+*/
+
+.answer-input {
+	width: 100%;
+	height: 90px;
+	resize: none;
+	padding: 6px 10px 6px 10px;
+	margin-bottom: 15px;
+	border: solid 1px #ccc;
+	border-radius: 4px;
 }

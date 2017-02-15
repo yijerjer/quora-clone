@@ -105,15 +105,16 @@ post '/questions/:id/upvote' do
 													user_id: current_user.id, 
 													vote: 1
 													)
+			"upvote".to_json
 		elsif user_vote.vote == 1 # if the user has already upvoted, remove his upvote
 			user_vote.destroy
+			"un-upvote".to_json
 		elsif user_vote.vote == -1 # if the user has downvoted, make it an upvote
 			user_vote.update(vote: 1)
+			"upvote un-downvote".to_json
 		end
-
-		redirect '/'
 	else
-		redirect '/sessions/new'
+ 		"/sessions/new".to_json
 	end
 end
 
@@ -127,21 +128,37 @@ post '/questions/:id/downvote' do
 													user_id: current_user.id, 
 													vote: -1
 													)
+			"downvote".to_json
 		elsif user_vote.vote == -1 # if the user has already downvoted, remove his downvote
 			user_vote.destroy
+			"un-downvote".to_json
 		elsif user_vote.vote == 1 # if the user has upvoted, make it a downvote
 			user_vote.update(vote: -1)
+			"un-upvote downvote".to_json
 		end
-
-		redirect '/'
 	else
-		redirect '/sessions/new'
+		"/sessions/new".to_json
 	end
 end
 
 ####################
 # ANSWERS
 ####################
+
+#answer a question
+post '/questions/:id/answers' do
+	if logged_in?
+		if params[:answer_text] == ""
+			"You did not provide an answer.".to_json
+		else
+			new_answer = Answer.create(text: params[:answer_text], question_id: params[:id], user_id: current_user.id)
+			"/questions/#{params[:id]}".to_json
+		end
+	else
+		"/sessions/new".to_json
+	end
+end
+
 
 #upvote answer
 post '/answers/:id/upvote' do
@@ -153,15 +170,16 @@ post '/answers/:id/upvote' do
 													user_id: current_user.id, 
 													vote: 1
 													)
+			"upvote".to_json
 		elsif user_vote.vote == 1 # if the user has already upvoted, remove his upvote
 			user_vote.destroy
+			"un-upvote".to_json
 		elsif user_vote.vote == -1 # if the user has downvoted, make it an upvote
 			user_vote.update(vote: 1)
+			"upvote un-downvote".to_json
 		end
-
-		redirect '/'
 	else
-		redirect '/sessions/new'
+		"/sessions/new".to_json
 	end
 end
 
@@ -175,14 +193,15 @@ post '/answers/:id/downvote' do
 													user_id: current_user.id, 
 													vote: -1
 													)
+			"downvote".to_json
 		elsif user_vote.vote == -1 # if the user has already downvoted, remove his downvote
 			user_vote.destroy
+			"un-downvote".to_json
 		elsif user_vote.vote == 1 # if the user has upvoted, make it a downvote
 			user_vote.update(vote: -1)
+			"un-upvote downvote".to_json
 		end
-
-		redirect '/'
 	else
-		redirect '/sessions/new'
+		"/sessions/new".to_json
 	end
 end
